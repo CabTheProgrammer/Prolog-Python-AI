@@ -19,6 +19,13 @@ isBV = IntVar()
 # Should break-down to show percentage with mild,percentage with severe
 #percentage with Delta and percentage with Mu
 
+#Basic Information
+lbl_name = tkinter.Label(window,text="Patient Name: ")
+ent_name = tkinter.Entry(window)
+lbl_age = tkinter.Label(window,text="Patient Age: ")
+ent_age = tkinter.Entry(window,width=3)
+
+
 lbl_Temp = tkinter.Label(window,text="Temperature(C)")
 ent_Tvalue = tkinter.Entry(window,width=3)
 lbl_dizzy = tkinter.Label(window,text="Dizziness")
@@ -27,13 +34,11 @@ lbl_BV = tkinter.Label(window,text="Blurred Vision")
 
 def displayBP():
     if(isDizzy.get()==1 or isBV.get()==1 or isFaint.get()==1):
-        lbl_dbv.grid(row=5,column=0)
-        ent_dbv.grid(row=5,column=1)
-        lbl_sbv.grid(row=6,column=0)
-        ent_sbv.grid(row=6,column=1)
-        print("This works!")
+        lbl_dbv.grid(row=6,column=0)
+        ent_dbv.grid(row=6,column=1)
+        lbl_sbv.grid(row=7,column=0)
+        ent_sbv.grid(row=7,column=1)
     else:
-        print("tedst")
         lbl_dbv.grid_forget()
         ent_dbv.grid_forget()
         lbl_sbv.grid_forget()
@@ -60,19 +65,27 @@ ent_sbv = tkinter.Entry(window,width=3)
 
 
 #Grid Section
-lbl_Temp.grid(row=0,column=0)
-ent_Tvalue.grid(row=0,column=1)
+lbl_name.grid(row =0,column = 0)
+ent_name.grid(row=0,column = 1)
 
-lbl_dizzy.grid(row=1,column=0)
-chb_dizzy.grid(row=1,column=1)
+lbl_age.grid(row =1,column = 0)
+ent_age.grid(row=1,column = 1)
 
-lbl_faint.grid(row=2,column=0)
-chb_faint.grid(row=2,column=1)
 
-lbl_BV.grid(row=3,column=0)
-chb_bv.grid(row=3,column=1)
 
-btn_submit.grid(row=4,column=0)
+lbl_Temp.grid(row=2,column=0)
+ent_Tvalue.grid(row=2,column=1)
+
+lbl_dizzy.grid(row=3,column=0)
+chb_dizzy.grid(row=3,column=1)
+
+lbl_faint.grid(row=4,column=0)
+chb_faint.grid(row=4,column=1)
+
+lbl_BV.grid(row=5,column=0)
+chb_bv.grid(row=5,column=1)
+
+btn_submit.grid(row=8,column=0)
 
 
 
