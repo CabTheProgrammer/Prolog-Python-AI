@@ -32,7 +32,7 @@ lbl_dizzy = tkinter.Label(window,text="Dizziness")
 lbl_faint = tkinter.Label(window,text="Fainting")
 lbl_BV = tkinter.Label(window,text="Blurred Vision")
 
-def displayBP():
+def displayBP(): #Displays options to capture blood pressure should the user click any of the options
     if(isDizzy.get()==1 or isBV.get()==1 or isFaint.get()==1):
         lbl_dbv.grid(row=6,column=0)
         ent_dbv.grid(row=6,column=1)
