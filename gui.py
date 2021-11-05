@@ -1,6 +1,10 @@
 import tkinter     # this is a gui library for python
 from tkinter import *
 
+#Sample run is to go in System Design.
+
+
+
 #Initial Stuff
 name = "Python Expert System"
 window = tkinter.Tk()
@@ -13,16 +17,34 @@ isDizzy = IntVar()
 isFaint = IntVar()
 isBV = IntVar()
 
+#Analyze should display likelihood patient has covid and add them to the knowledge base.
+#View Statistics to show overall statistics.
 
+
+
+#like if temp over 120, then they have mu for example(mu is the most serious one)
+#nausea is a symptom of mu variant and not regular covid
+#loss of speech or mobility, or confusion is a symptom of regular covid.
+#set it so that you can only pick one or the other in terms of symptoms.
+# Ask if person is vaccinated
+#if temperature is lower with symptoms then it is probably delta(treat delta as the wimp one)
+
+#General covid symptoms
+#Over five symptoms checked or if they have a really high temperature then they are severe, otherwise they are mild
+
+#other things to check for
+#tired easily
+#shortness of breath
+#say something if pressure too high or too low 
 
 # function here to display % of persons who have covid based on symptons
 # Should break-down to show percentage with mild,percentage with severe
 #percentage with Delta and percentage with Mu
 
 #Basic Information
-lbl_name = tkinter.Label(window,text="Patient Name: ")
+lbl_name = tkinter.Label(window,pady=10,text="Patient Name: ")
 ent_name = tkinter.Entry(window)
-lbl_age = tkinter.Label(window,text="Patient Age: ")
+lbl_age = tkinter.Label(window,pady=10,text="Patient Age: ")
 ent_age = tkinter.Entry(window,width=3)
 
 
@@ -44,7 +66,11 @@ def displayBP(): #Displays options to capture blood pressure should the user cli
         lbl_sbv.grid_forget()
         ent_sbv.grid_forget()
 
-
+def gatherinput():
+    name = ent_name.get("1.0",END) # Captures text from input
+    age = ent_age.get("1.0","end-1c")
+    temp = ent_Tvalue.get("1.0",END)
+    # TODO: Capture other values!
 
 
 #Checkboxes for the last three
