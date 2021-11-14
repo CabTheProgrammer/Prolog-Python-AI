@@ -32,13 +32,14 @@ iseasilytired = IntVar()
 #string variables
 
 #TODO: 
+#Normal Human Temperature: 37 Celcius or 98.6 Farenheit
 #Sample run is to go in System Design.
 #Analyze should display likelihood patient has covid and add them to the knowledge base.
 #View Statistics to show overall statistics.
 
 #like if temp over 120, then they have mu for example(mu is the most serious one)
 #nausea is a symptom of mu variant and not regular covid
-#loss of speech or mobility, or confusion is a symptom of regular covid.
+#loss of speech or mobility, or confusion is a symptom of regular covid.[IGNORE?]
 #set it so that you can only pick one or the other in terms of symptoms.
 # Ask if person is vaccinated
 #if temperature is lower with symptoms then it is probably delta(treat delta as the wimp one)
@@ -49,7 +50,7 @@ iseasilytired = IntVar()
 #other things to check for
 #tired easily[x]
 #shortness of breath[x]
-#say something if pressure too high or too low 
+#say something if pressure too high or too low [x]
 
 # function here to display % of persons who have covid based on symptons
 # Should break-down to show percentage with mild,percentage with severe
@@ -139,7 +140,8 @@ def gatherinput():
         
 
     p1 = patient.Patient(name,age,sex.get(),temp,vax.get(),symptoms,systolic,diastolic)
-    p1.pinfo()
+    #p1.pinfo()
+    p1.prologanlyze()
     DisplayString(p1.pstring())
     
  

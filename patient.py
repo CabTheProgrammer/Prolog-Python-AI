@@ -1,5 +1,9 @@
-from ast import Str
-import pyswip
+#from ast import Str
+import pyswip 
+from pyswip import Prolog
+from pathlib import Path
+prolog = Prolog()
+prolog.consult("CovidKnowledgeBase.pl")
 
 class Patient:
     def __init__(self,name,age,sex,temp,vax_status,symptom_set,systolic,diastolic):
@@ -11,7 +15,7 @@ class Patient:
         self.symptom_set=symptom_set # This is a set to hold all checked symbols, the rest are strings
         self.diastolic = diastolic
         self.systolic = systolic
-
+        self.numSymptoms = len(self.symptom_set) # number of symptoms of the patient
 
     def pinfo(self):
         
@@ -47,6 +51,11 @@ class Patient:
         string+=("===============================\n")
         return string
 
+    def prologanlyze(self):
+       if( bool(list(prolog.query("have_mu("+self.temp+","+"Nausea"+")")))) == True:
+           print("You have mu!!")
+       else:
+           print("U don't have covid :)")
 
 
 def toFarenheit(celcius):  # converts from celcius to farenheit
