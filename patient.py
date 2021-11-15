@@ -52,11 +52,31 @@ class Patient:
         string+=("===============================\n")
         return string
 
-    def prologanlyze(self):
-       if( bool(list(prolog.query("have_mu("+self.temp+","+"Nausea"+")")))) == True:
-           print("You have mu!!")
-       else:
-           print("U don't have covid :)")
+    # list(prolog.query("father(michael,X)")) == [{'X': 'john'}, {'X': 'gina'}]
+    # for soln in prolog.query("father(X,Y)"):
+    #     print(soln["X"], "is the father of", soln["Y"])
+
+
+
+    def prologanlyze(self): # Analyzes which strain the patient has
+     #bool(list(prolog.query("covid_diag("+self.temp+","+stringStripper(self.symptom_set)+")")))) == True:
+        results = list(prolog.query("covid_diag("+self.temp+","+stringStripper(self.symptom_set)+",X)"))
+        for stuff in results:
+            result = stuff["X"]
+            break
+
+        if(result == 1):
+            print("You have mu")
+        elif(result == 2):
+            print("You have Delta")
+        elif(result == 3):
+            print("You have regular covid")
+        else:
+            print("You do not have covid :)")
+
+        
+        
+
     def PressureAnalyze(self): # Analyzes the blood pressure of the patient
         pass
     def SeverityAnalyze(self): # Analyzes severity of the patient
@@ -72,3 +92,7 @@ def toFarenheit(celcius):  # converts from celcius to farenheit
     Farenheit = ((int(celcius) * 9)/5) +32 
     return Farenheit
 
+def stringStripper(astring):
+    strip = str(astring)[1:-1]
+    strip = "["+strip+"]"
+    return strip
