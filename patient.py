@@ -1,4 +1,5 @@
 #from ast import Str
+from ctypes import string_at
 import pyswip 
 from pyswip import Prolog
 from pathlib import Path
@@ -56,7 +57,16 @@ class Patient:
            print("You have mu!!")
        else:
            print("U don't have covid :)")
+    def PressureAnalyze(self): # Analyzes the blood pressure of the patient
+        pass
+    def SeverityAnalyze(self): # Analyzes severity of the patient
+        pass
+    def PatientSave(self,str_analysis): # Saves all patient data to a file
+        pass
 
+def StatsCalc(): # Reads patient data and recalculates the statistics; returns results in a string
+    string = 'blank'
+    return  string
 
 def toFarenheit(celcius):  # converts from celcius to farenheit
     Farenheit = ((int(celcius) * 9)/5) +32 

@@ -31,9 +31,11 @@ iseasilytired = IntVar()
 
 #string variables
 
-#TODO: 
+#TODO:
+# Add a textbox to collect symptoms that are not there... 
 #Normal Human Temperature: 37 Celcius or 98.6 Farenheit
 #Sample run is to go in System Design.
+#Write a reccomendation based on severity and strain.
 #Analyze should display likelihood patient has covid and add them to the knowledge base.
 #View Statistics to show overall statistics.
 
