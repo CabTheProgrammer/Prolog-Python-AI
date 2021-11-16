@@ -1,5 +1,6 @@
 import tkinter     # this is a gui library for python
 import patient
+import statsmanager
 from tkinter import *
 
 
@@ -8,7 +9,7 @@ name = "Python Expert System(PES)"
 window = tkinter.Tk()
 window.title(name)
 window.geometry("600x500")# Sets window size
-window.minsize(width=600,height=250)
+window.minsize(width=610,height=350)
 
 #Section for various frames
 basicinfo = Frame(window,borderwidth=2,relief=RIDGE)
@@ -96,9 +97,6 @@ def DisplayString(astring): # Function to display stuff in the text box
     txt_display.insert('2.0',astring)
     txt_display['state']= 'disabled'
 
-
-    pass
-
 def displayBP(): #Displays options to capture blood pressure should the user click any of the options
     if(isDizzy.get()==1 or isBV.get()==1 or isFaint.get()==1):
         lbl_dbv.grid(row=8,column=0)
@@ -143,8 +141,10 @@ def gatherinput():
 
     p1 = patient.Patient(name,age,sex.get(),temp,vax.get(),symptoms,systolic,diastolic)
     #p1.pinfo()
-    p1.prologanlyze()
-    DisplayString(p1.pstring())
+    #p1.prologanlyze()
+    #p1.PressureAnalyze()
+    #DisplayString(p1.pstring())
+    statsmanager.kowalski()
     
  
 
