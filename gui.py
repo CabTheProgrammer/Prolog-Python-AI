@@ -9,7 +9,7 @@ name = "Python Expert System(PES)"
 window = tkinter.Tk()
 window.title(name)
 window.geometry("600x500")# Sets window size
-window.minsize(width=610,height=350)
+window.minsize(width=650,height=350)
 
 #Section for various frames
 basicinfo = Frame(window,borderwidth=2,relief=RIDGE)
@@ -63,7 +63,7 @@ iseasilytired = IntVar()
 lbl_name = tkinter.Label(basicinfo,pady=10,text="Patient Name: ")
 ent_name = tkinter.Entry(basicinfo)
 lbl_age = tkinter.Label(basicinfo,pady=10,text="Patient Age: ")
-ent_age = tkinter.Entry(basicinfo,width=3)
+ent_age = tkinter.Entry(basicinfo,width=5)
 #Sex of Person
 lbl_sex = tkinter.Label(basicinfo,pady=10,text="Sex: ")
 rad_male = tkinter.Radiobutton(basicinfo, text="Male",variable=sex,value='male')
@@ -75,7 +75,7 @@ rad_novax = tkinter.Radiobutton(basicinfo, text="Unvaccinated",variable=vax,valu
 
 
 lbl_Temp = tkinter.Label(basicinfo,text="Temperature(C)")
-ent_Tvalue = tkinter.Entry(basicinfo,width=3)
+ent_Tvalue = tkinter.Entry(basicinfo,width=5)
 
 #Symptoms
 lbl_dizzy = tkinter.Label(symptoms,text="Dizziness")
@@ -90,10 +90,17 @@ txt_display['state']= 'disabled' #prevents user from editing text
 # txt_display['state'] = 'normal' how to display text
 txt_display.grid(row =0,column = 0)
 
-def DisplayString(astring): # Function to display stuff in the text box
+def DisplayString(astring,flag): # Function to display stuff in the text box
     txt_display['state'] = 'normal'
     txt_display.delete('1.0', END) #clears display  
-    txt_display.insert('1.35','===Analysis Output===')
+    if(flag == 1):
+        txt_display.insert('1.35','===Analysis Output===')
+    elif (flag == 2):
+        txt_display.insert('1.35','===Recorded Patients===')
+    else:
+        txt_display.insert('1.35','===Patient Statistics===')
+
+
     txt_display.insert('2.0',astring)
     txt_display['state']= 'disabled'
 
@@ -143,12 +150,14 @@ def gatherinput():
     #p1.pinfo()
     #p1.prologanlyze()
     #p1.PressureAnalyze()
-    #DisplayString(p1.pstring())
-    statsmanager.kowalski()
+    DisplayString(p1.pstring(),1)
+    #p1.PatientSave()
     
  
-
-
+def printall():
+    DisplayString(statsmanager.printall(),1)
+def statistic():
+     DisplayString(statsmanager.statistic()+statsmanager.statistic2(),3)
 
 #Checkboxes for the rest
 chb_dizzy = tkinter.Checkbutton(symptoms, text="",variable=isDizzy,onvalue=1, offvalue=0,command=displayBP)
@@ -164,13 +173,14 @@ lbl_shortbreath = tkinter.Label(symptoms,text="Short of Breath")
 lbl_easily = tkinter.Label(symptoms,text="Easily tired")
 
 
-btn_submit = tkinter.Button(symptoms,text="Analyze!",command = gatherinput) #Adds patient's data to file and displays analysis results
-btn_statistics = tkinter.Button(symptoms,text="Statistics!") # Displays overall statistics on screen
+btn_submit = tkinter.Button(symptoms,text="Analyze",command = gatherinput) #Adds patient's data to file and displays analysis results
+btn_statistics = tkinter.Button(symptoms,text="Statistics",command = statistic) # Displays overall statistics on screen
+btn_viewpatients = tkinter.Button(symptoms,text="View Patients",command = printall) # Displays overall statistics on screen
 #For Blood Pressure, ONLY ask if patient is dizzy, faint or BV
 lbl_dbv = tkinter.Label(symptoms,text="Blood Pressure (diastolic)")
-ent_dbv = tkinter.Entry(symptoms,width=3)
+ent_dbv = tkinter.Entry(symptoms,width=5)
 lbl_sbv = tkinter.Label(symptoms,text="Blood Pressure (systolic)")
-ent_sbv = tkinter.Entry(symptoms,width=3)
+ent_sbv = tkinter.Entry(symptoms,width=5)
 
 
 
@@ -215,7 +225,7 @@ chb_easily.grid(row=12,column=1)
 
 btn_submit.grid(row=13,column=0)
 btn_statistics.grid(row=13,column=2)
-
+btn_viewpatients.grid(row=13,column=3)
 
 
 window.bind()
