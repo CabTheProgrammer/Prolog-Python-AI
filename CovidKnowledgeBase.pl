@@ -15,12 +15,12 @@ covid_diag(Temperature,Symp,Diag):- have_mu(Temperature,Symp) -> Diag is 1;
 
 
 
-blood_pressure_warn(Sys,Dias,Warn):- Sys<90,Dias<60 -> Warn is 1; % 1 for low, 2 for normal and  3 for high
-                                     Sys>=130,Dias>=80 -> Warn is 3;
+blood_pressure_warn(Sys,Dias,Warn):- (Sys<100;Dias<60) -> Warn is 1; % 1 for low, 2 for normal and  3 for high
+                                     (Sys>120;Dias>80) -> Warn is 3;
                                      Warn is 2.
 %This works
 
-severity(Temp,NumSym,Severity):- NumSym>=3;Temp>39.5 -> Severity is 1; Severity is 2.
+severity(Temp,NumSym,Severity):- (NumSym>=3;Temp>39.5) -> Severity is 1; Severity is 2.
                            % 2 if non-severe, 1 if otherwise
                            %39.5 is a high fever
 %this works
