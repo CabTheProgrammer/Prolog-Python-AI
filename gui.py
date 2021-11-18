@@ -9,7 +9,7 @@ name = "Python Expert System(PES)"
 window = tkinter.Tk()
 window.title(name)
 window.geometry("600x500")# Sets window size
-window.minsize(width=650,height=350)
+window.minsize(width=700,height=400)
 
 #Section for various frames
 basicinfo = Frame(window,borderwidth=2,relief=RIDGE)
@@ -29,35 +29,16 @@ vax = StringVar(value='Unvaccinated') #1 if the person is vaccinated; 0 if they 
 isNausea = IntVar()
 isshortofbreath = IntVar()
 iseasilytired = IntVar()
-
+isBache = IntVar()
+isRnose = IntVar()
+isHache = IntVar()
+isSore = IntVar()
+isFever = IntVar()
+isCough = IntVar()
+isSense = IntVar()
 #string variables
 
-#TODO:
-# Add a textbox to collect symptoms that are not there... 
-#Normal Human Temperature: 37 Celcius or 98.6 Farenheit
-#Sample run is to go in System Design.
-#Write a reccomendation based on severity and strain.
-#Analyze should display likelihood patient has covid and add them to the knowledge base.
-#View Statistics to show overall statistics.
 
-#like if temp over 120, then they have mu for example(mu is the most serious one)
-#nausea is a symptom of mu variant and not regular covid
-#loss of speech or mobility, or confusion is a symptom of regular covid.[IGNORE?]
-#set it so that you can only pick one or the other in terms of symptoms.
-# Ask if person is vaccinated
-#if temperature is lower with symptoms then it is probably delta(treat delta as the wimp one)
-
-#General covid symptoms
-#Over five symptoms checked or if they have a really high temperature then they are severe, otherwise they are mild
-
-#other things to check for
-#tired easily[x]
-#shortness of breath[x]
-#say something if pressure too high or too low [x]
-
-# function here to display % of persons who have covid based on symptons
-# Should break-down to show percentage with mild,percentage with severe
-#percentage with Delta and percentage with Mu
 
 #Basic Information
 lbl_name = tkinter.Label(basicinfo,pady=10,text="Patient Name: ")
@@ -81,6 +62,15 @@ ent_Tvalue = tkinter.Entry(basicinfo,width=5)
 lbl_dizzy = tkinter.Label(symptoms,text="Dizziness")
 lbl_faint = tkinter.Label(symptoms,text="Fainting")
 lbl_BV = tkinter.Label(symptoms,text="Blurred Vision")
+
+lbl_bache= tkinter.Label(symptoms,text="Body Ache")
+lbl_rnose = tkinter.Label(symptoms,text="Runny Nose")
+lbl_hache = tkinter.Label(symptoms,text="Headache")
+
+lbl_sore = tkinter.Label(symptoms,text="Sore Throat")
+lbl_fev = tkinter.Label(symptoms,text="Fever")
+lbl_cough = tkinter.Label(symptoms,text="Cough")
+lbl_sense = tkinter.Label(symptoms,text="Loss of taste/smell")
 
 
 #for output
@@ -143,8 +133,21 @@ def gatherinput():
     if(isshortofbreath.get() == 1):
         symptoms.add("Short of Breath")
     if(iseasilytired.get() == 1):
-        symptoms.add("Easily Tired") 
-        
+        symptoms.add("Easily Tired")     
+    if(isBache.get()==1):
+        symptoms.add("Body Ache")
+    if(isRnose.get()==1):
+        symptoms.add("Runny Nose")
+    if(isHache.get()==1):
+        symptoms.add("Headache")
+    if(isSore.get()==1):
+        symptoms.add("Sore Throat'")
+    if(isFever.get()==1):
+        symptoms.add("Fever")
+    if(isCough.get()==1):
+        symptoms.add("Cough")
+    if(isSense.get()==1):
+        symptoms.add("Loss of taste or smell")
 
     p1 = patient.Patient(name,age,sex.get(),temp,vax.get(),symptoms,systolic,diastolic)
     #p1.pinfo()
@@ -153,7 +156,6 @@ def gatherinput():
     DisplayString(p1.pstring(),1)
     #p1.PatientSave()
     
- 
 def printall():
     DisplayString(statsmanager.printall(),1)
 def statistic():
@@ -167,6 +169,16 @@ chb_bv = tkinter.Checkbutton(symptoms,variable=isBV,onvalue=1, offvalue=0, comma
 chb_nausea = tkinter.Checkbutton(symptoms, text="",variable=isNausea,onvalue=1, offvalue=0, command=displayBP)
 chb_shortbreath = tkinter.Checkbutton(symptoms, text="",variable=isshortofbreath,onvalue=1, offvalue=0, command=displayBP)
 chb_easily = tkinter.Checkbutton(symptoms, text="",variable=iseasilytired,onvalue=1, offvalue=0, command=displayBP)
+
+#More symptom checkboxes
+chb_bache = tkinter.Checkbutton(symptoms, text="",variable=isBache,onvalue=1, offvalue=0,command=displayBP)
+chb_rnose = tkinter.Checkbutton(symptoms, text="",variable=isRnose,onvalue=1, offvalue=0,command=displayBP)
+chb_hache = tkinter.Checkbutton(symptoms, text="",variable=isHache,onvalue=1, offvalue=0,command=displayBP)
+chb_sore = tkinter.Checkbutton(symptoms, text="",variable=isSore,onvalue=1, offvalue=0,command=displayBP)
+chb_fev= tkinter.Checkbutton(symptoms, text="",variable=isFever,onvalue=1, offvalue=0,command=displayBP)
+chb_cough = tkinter.Checkbutton(symptoms, text="",variable=isCough,onvalue=1, offvalue=0,command=displayBP)
+chb_sense = tkinter.Checkbutton(symptoms, text="",variable=isSense,onvalue=1, offvalue=0,command=displayBP)
+
 
 lbl_nausea = tkinter.Label(symptoms,text="Feelings of Nausea")
 lbl_shortbreath = tkinter.Label(symptoms,text="Short of Breath")
@@ -222,6 +234,27 @@ chb_shortbreath.grid(row=11,column=1)
 lbl_easily.grid(row=12,column=0)
 chb_easily.grid(row=12,column=1)
 
+
+lbl_bache.grid(row=5,column=2)
+chb_bache.grid(row=5,column=3)
+
+lbl_rnose.grid(row=6,column=2)
+chb_rnose.grid(row=6,column=3)
+
+lbl_hache.grid(row=7,column=2)
+chb_hache.grid(row=7,column=3)
+
+lbl_sore.grid(row=8,column=2)
+chb_sore.grid(row=8,column=3)
+
+lbl_fev.grid(row=9,column=2)
+chb_fev.grid(row=9,column=3)
+
+lbl_cough.grid(row=10,column=2)
+chb_cough.grid(row=10,column=3)
+
+lbl_sense.grid(row=11,column=2)
+chb_sense.grid(row=11,column=3)
 
 btn_submit.grid(row=13,column=0)
 btn_statistics.grid(row=13,column=2)

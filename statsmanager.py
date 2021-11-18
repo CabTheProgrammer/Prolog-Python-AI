@@ -86,7 +86,8 @@ def printall():
         masterstring+=("Diagnosis: "+row[6]+"\n")
         masterstring+=("Severity: "+row[7]+"\n")
         masterstring+=("Blood Pressure Analysis:: "+row[8]+"\n")
-        masterstring+="===============================\n\n"
+        masterstring+="===============================\n"
+        masterstring+=row[9]
 
 
     sqliteConnection.commit()
